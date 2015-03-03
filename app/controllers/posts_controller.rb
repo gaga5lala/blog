@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
-	
+
 	def index
-		@posts = Post.all
+		@posts = Post.page(params[:page]).per(3)
 		@page_title = 'Home'
 	end
 
