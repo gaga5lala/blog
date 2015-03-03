@@ -1,15 +1,17 @@
 class PostsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
 	def index
-		
+		@page_title = 'Home'
+		@post = Post.all
 	end
 
 	def show
-		
+		@post = Post.find(params[:id])
+		@page_title = @post.title
 	end
 
 	def new
-		
+		@p
 	end
 
 	def edit
