@@ -1,38 +1,59 @@
 class PostsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
+	
 	def index
+		@posts = Post.all
 		@page_title = 'Home'
-		@post = Post.all
-	end
-
-	def show
-		@post = Post.find(params[:id])
-		@page_title = @post.title
 	end
 
 	def new
-		@p
+		@post = Post.new
+		@page_title = 'New Post'
 	end
 
-	def edit
-		
-	end
-
-	def update
-	 	
+	def show
+		find_post
+		@page_title = @post.title
 	end
 
 	def create
-		
+		@post = Post.new(post_params)
+
+		if @post.save
+			redirect_to post_url(@post)
+		else
+			render :action => new			
+		end
 	end
 
-	def destroy #old not general name delete
-		
+	def edit
+		find_post
+		@page_title = "edit #{@post.title}"
 	end
 
-	#protected
+	def update
+	 	find_post
+	 	if @post.update(post_params)
+	 		redirect_to post_url(@post)
+	 	else
+	 		render :action => :edit
+	 	end
+	end
 
-  	#def find_event
-    #	@event = Event.find(params[:id])
-  	#end
+	def destroy
+		find_post
+		@post.destroy
+
+		redirect_to posts_path
+	end
+
+	protected
+
+	def post_params
+		params.require(:post).permit(:title, :body)
+	end
+
+  	def find_post
+    	@post = Post.find(params[:id])
+  	end
 end
