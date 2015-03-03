@@ -1,0 +1,6 @@
+<%= simple_format(@post.title, { class: 'title', id: 'title'}, wrapper_tag: "h2") %>
+
+<%= simple_format(@post.body, {class: 'body', id: 'body'}, wrapper_tag: "p") %>
+
+<%# link_to "Back to Index", :controller => 'posts', action: 'index' %>
+<%= link_to "<文章列表", posts_path %>

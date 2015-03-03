@@ -1,0 +1,13 @@
+<h1>post new</h1>
+
+<%= form_for @post, :url => posts_path, html:{class: 'new_event'} do |f| %>
+<div>
+<%= f.label :title, 'title' %>
+<%= f.text_field :title %>
+</div>
+<div>
+<%=  f.label :body, 'body'%>
+<%=  f.text_area :body%>
+</div>
+<%= f.submit %>
+<% end %>
