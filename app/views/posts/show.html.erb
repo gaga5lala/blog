@@ -1,13 +1,12 @@
-<%= simple_format(@post.title, { class: 'title', id: 'title'}, wrapper_tag: "h2") %>
-<h5><%= "Author: #{@author}" %></h5>
+<%= simple_format(@post.title, { class: 'title', id: 'title'}, wrapper_tag: "h1") %>
+<h5><%= "作者: #{@author}" %></h5>
 <%= simple_format(@post.body, {class: 'body', id: 'body'}, wrapper_tag: "p") %>
-<%#= @post. %>
-<%# link_to "Back to Index", :controller => 'posts', action: 'index' %>
+
 <div id="comments">
-	<h2><%= @post.comments.count %> Comments</h2>
+	<h3><%= @post.comments.count %> 則留言</h3>
 	<%= render @post.comments %>
 
-	<h3>Add a comment:</h3>
+	<h4>留言:</h4>
 	<%= render "comments/form" %>
 </div>
 
