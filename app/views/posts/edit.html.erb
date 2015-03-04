@@ -1,13 +1,23 @@
-<h1>edit</h1>
+<h1>修改文章</h1>
 
-<%= form_for @post, :url => post_path(@post), :method => :patch, html:{class: 'new_event'} do |f| %>
+<div class="error">
+	<% if @post.errors.any? %>
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+	<% end %>
+</div>
+
+<%= form_for @post, :url => post_path(@post), :method => :patch, html:{class: 'edit_post'} do |f| %>
 <div>
-<%= f.label :title, 'title' %>
+<%= f.label :title, '標題' %>
 <%= f.text_field :title %>
 </div>
 <div>
-<%=  f.label :body, 'body'%>
+<%=  f.label :body, '內容'%>
 <%=  f.text_area :body%>
 </div>
-<%= f.submit %>
+<%= f.submit '修改' %>
 <% end %>

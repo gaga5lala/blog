@@ -1,13 +1,23 @@
-<h1>post new</h1>
+<h1>新增文章</h1>
+<div class="error">
+	<% if @post.errors.any? %>
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+	<% end %>
+</div>
+
 
 <%= form_for @post, :url => posts_path, html:{class: 'new_event'} do |f| %>
 <div>
-<%= f.label :title, 'title' %>
+<%= f.label :title, '標題' %>
 <%= f.text_field :title %>
 </div>
 <div>
-<%=  f.label :body, 'body'%>
+<%=  f.label :body, '內容'%>
 <%=  f.text_area :body%>
 </div>
-<%= f.submit %>
+<%= f.submit '新增'%>
 <% end %>
