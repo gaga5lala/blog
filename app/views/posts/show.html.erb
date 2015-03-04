@@ -1,5 +1,5 @@
 <%= simple_format(@post.title, { class: 'title', id: 'title'}, wrapper_tag: "h2") %>
-
+<h5><%= "Author: #{@author}" %></h5>
 <%= simple_format(@post.body, {class: 'body', id: 'body'}, wrapper_tag: "p") %>
 <%#= @post. %>
 <%# link_to "Back to Index", :controller => 'posts', action: 'index' %>
@@ -10,6 +10,5 @@
 	<h3>Add a comment:</h3>
 	<%= render "comments/form" %>
 </div>
-
 
 <%= link_to "<文章列表", posts_path %>

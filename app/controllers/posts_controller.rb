@@ -13,6 +13,8 @@ class PostsController < ApplicationController
 
 	def show
 		find_post
+		@author = @post.user.username
+		@author_id = @post.user.id
 		@page_title = @post.title
 	end
 
@@ -50,7 +52,7 @@ class PostsController < ApplicationController
 	protected
 
 	def post_params
-		params.require(:post).permit(:title, :body)
+		params.require(:post).permit(:title, :body, :user_id)
 	end
 
   	def find_post
