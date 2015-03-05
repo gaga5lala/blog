@@ -1,0 +1,15 @@
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+	<ul class="nav navbar-nav navbar-left" >
+		<li><%= link_to('BLOG', root_url) %> </li>
+		<% if current_user %>
+		  <li><%= link_to("#{current_user.username}你好", edit_registration_path(:user)) %> 
+		  <li><%= link_to('登出', destroy_user_session_path, :method => :delete) %> </li>
+		  </li>
+		  <li><%= link_to('新增文章', new_post_path) %></li>
+		<% else %>
+		  <li><%= link_to('註冊', new_registration_path(:user)) %> </li>
+		  <li><%= link_to('登入', new_session_path(:user)) %></li>
+		<% end %>
+	</ul>
+	
+</nav>
