@@ -1,14 +1,18 @@
-<div class="comment clearfix">
-	<div class="comment_content">
-		<p class="comment_name"><strong><%= "#{comment.name}說:" %></strong></p>
-		<p class="comment_body"><%= comment.body %></p>
-		<p class="comment_time"><%= time_ago_in_words(comment.created_at) %> Ago</p>
+<div class="comment">
+	<div class="comment-content">
+		<p class="comment-time"><%= time_ago_in_words(comment.created_at) %> Ago</p>
+		<p class="comment-name"><strong><%= "#{comment.name}說:" %></strong></p>
+		<p class="comment-body"><%= comment.body %></p>
+		
 	</div>
 
+
 	<% if user_signed_in? && current_user.id == @author_id %>
-	<p><%= link_to '刪除', [comment.post, comment],
+		<p><%= link_to '刪除', [comment.post, comment],
 								  method: :delete,
 								  class: "button",
-								 	data: { confirm: '確定刪除?' } %></p>
+								 data: { confirm: '確定刪除?' } %>
+	 	</p>
  	<% end %>
+ 	<hr></hr>
 </div>

@@ -1,29 +1,28 @@
-<div class="header">
-	<% if current_user %>
-	  <%= "#{current_user.username}你好 "%>
-	  <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
-	  <%= link_to('修改密碼', edit_registration_path(:user)) %> |
-	  <%= link_to('新增文章', new_post_path) %>
-	<% else %>
-	  <%= link_to('註冊', new_registration_path(:user)) %> |
-	  <%= link_to('登入', new_session_path(:user)) %>
-	<% end %>
-</div>
+<%= render 'header' %>
 
-<div class="content">
-	<h1>所有文章</h1>
-<% @posts.each do |post| %>
-	<div class="post_wrapper">
-		<h5 class="date"><%= post.created_at.strftime("%B %d, %Y") %></h5>
-		<h2 class="title"><%= link_to post.title, post %></h2>
-		<%= truncate(post.body, length: 10)%><%= link_to ' 繼續閱讀', post_path(post) %>
-		
-		<% if current_user && post.user_id == current_user.id %>
-			<%= link_to "編輯", edit_post_path(post) %>
-			<%= link_to '刪除', post_path(post), :method => :delete, data: {confirm: "確定要刪除嗎?"} %>
-		<% end %>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<% @posts.each do |post| %>
+				<div class="post-preview">
+					<p class="post-meta"><%= post.created_at.strftime("%B %d, %Y") %></p>
+					<div class="post-edit">
+						<% if current_user && post.user_id == current_user.id %>
+							<%= link_to "編輯", edit_post_path(post) %>
+							<%= link_to '刪除', post_path(post), :method => :delete, data: {confirm: "確定要刪除嗎?"} %>
+						<% end %>
+					</div>
+
+					<%= link_to(
+						raw("<h2 class='post-title'>#{post.title}</h2>
+							<h3 class='post-content-'>#{ truncate(post.body, length: 10)}</h3>"
+					),post_path(post))  %>
+
+				</div>
+				<hr></hr>
+			<% end %>
+		</div>
+		<%= paginate @posts, :window =>2 %>
 	</div>
-<% end %>
 
-<%= paginate @posts, :window =>2 %>
 </div>

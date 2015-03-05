@@ -1,23 +1,34 @@
-<h1>修改文章</h1>
+<%= render 'header' %>
 
-<div class="error">
-	<% if @post.errors.any? %>
-      <ul>
-      <% @post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-	<% end %>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<h1>修改文章</h1>
+			<hr></hr>
+			<div class="error">
+				<% if @post.errors.any? %>
+			      <ul>
+			      <% @post.errors.full_messages.each do |msg| %>
+			        <li><%= msg %></li>
+			      <% end %>
+			      </ul>
+				<% end %>
+			</div>
+
+
+			<%= form_for @post, :url => post_path(@post), :method => :patch do |f| %>
+				<div class="form-group">
+					<%= f.label :title, '標題' %>
+					<%= f.text_field :title, class: "form-control" %>
+				</div>
+				<div class="form-group">
+					<%=  f.label :body, '內容'%>
+					<%=  f.text_area :body, {class: "form-control", rows: '6'}%>
+				</div>
+				<%= f.submit '修改', class: "btn btn-default" %>
+			<% end %>
+			<br/>
+		</div>
+	</div>
 </div>
 
-<%= form_for @post, :url => post_path(@post), :method => :patch, html:{class: 'edit_post'} do |f| %>
-<div>
-<%= f.label :title, '標題' %>
-<%= f.text_field :title %>
-</div>
-<div>
-<%=  f.label :body, '內容'%>
-<%=  f.text_area :body%>
-</div>
-<%= f.submit '修改' %>
-<% end %>

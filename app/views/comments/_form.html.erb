@@ -1,12 +1,12 @@
-<div class="content">
+<div class="comment-wrapper">
 	<%= form_for([@post, @post.comments.build]) do |f| %>
 		<%= f.label :name, '姓名' %><br>
-		<%= f.text_field :name %><br>
+		<%= f.text_field :name, class: "form-control" %>
 		<br>
-		<%= f.label :body, '內容' %><br>
-		<%= f.text_area :body %><br>
+		<%= f.label :body, '內容' %>
+		<%= f.text_area :body, class: "form-control" %>
 		<br>
-		<%= f.submit '送出' %>
+		<%= f.submit '送出', class: "btn btn-default" %>
 	<% end %>
 
 	<div class="error">
