@@ -2,7 +2,7 @@
 	<% if current_user %>
 	  <%= "#{current_user.username}你好 "%>
 	  <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
-	  <%= link_to('修改密碼', edit_registration_path(:user)) %>
+	  <%= link_to('修改密碼', edit_registration_path(:user)) %> |
 	  <%= link_to('新增文章', new_post_path) %>
 	<% else %>
 	  <%= link_to('註冊', new_registration_path(:user)) %> |
@@ -10,8 +10,8 @@
 	<% end %>
 </div>
 
-<h1>所有文章</h1>
-
+<div class="content">
+	<h1>所有文章</h1>
 <% @posts.each do |post| %>
 	<div class="post_wrapper">
 		<h5 class="date"><%= post.created_at.strftime("%B %d, %Y") %></h5>
@@ -26,3 +26,4 @@
 <% end %>
 
 <%= paginate @posts, :window =>2 %>
+</div>

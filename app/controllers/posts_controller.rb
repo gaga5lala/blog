@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
 
 	def index
-		@posts = Post.page(params[:page]).per(3)
+		@posts = Post.page(params[:page]).per(3).order('created_at DESC')
 		@page_title = 'Home'
 	end
 
@@ -13,8 +13,11 @@ class PostsController < ApplicationController
 
 	def show
 		find_post
-		@author = @post.user.username
-		@author_id = @post.user.id
+		if defined?(@post.user.username) && @post.user.username != ''
+			@author = @post.user.username	
+			@author_id = @post.user.id
+		end
+		
 		@page_title = @post.title
 	end
 
