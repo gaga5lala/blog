@@ -1,18 +1,15 @@
 ActiveAdmin.register Comment, as: "UserComment" do
-
   permit_params :post, :name, :body
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # permit_params :list, :of, :attributes, :on, :model
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:permitted, :attributes]
-  #   permitted << :other if resource.something?
-  #   permitted
-  # end
+  
+  index do
+    selectable_column
+    id_column
+    column :name
+    column :body
+    column "Post_title", :post_id  do |comment|
+      link_to comment.post.title ,admin_post_path(comment.post_id)
+    end
 
-
+    actions
+  end
 end
